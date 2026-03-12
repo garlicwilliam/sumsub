@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model UserKycStatus {
+  id           BigInt @id @default(autoincrement())
+  userAddress  String @unique(map: "user") @map("user_address") @db.VarChar(64)
+  applicantId  String @map("applicant_id") @db.VarChar(64)
+  levelName    String @map("level_name") @db.VarChar(64)
+  reviewStatus String @map("review_status") @db.VarChar(32)
+  reviewAnswer String @map("review_answer") @db.VarChar(16)
+  rejectedType String @map("rejected_type") @db.VarChar(16)
+  updatedAt    BigInt @map("updated_at")
+  createdAt    BigInt @map("created_at")
+
+  @@map("user_kyc_status")
+}
+
+model UserKycLogs {
+  id                BigInt  @id @default(autoincrement())
+  createdAt         BigInt  @map("created_at")
+  correlationId     String  @map("correlation_id") @db.VarChar(64)
+  applicantId       String  @map("applicant_id") @db.VarChar(64)
+  userAddress       String  @map("user_address") @db.VarChar(64)
+  levelName         String  @map("level_name") @db.VarChar(64)
+  type              String  @map("type") @db.VarChar(32)
+  reviewStatus      String  @map("review_status") @db.VarChar(32)
+  reviewAnswer      String? @map("review_answer") @db.VarChar(16)
+  rejectedType      String? @map("rejected_type") @db.VarChar(16)
+  clientComment     String? @map("client_comment") @db.Text
+  moderationComment String? @map("moderation_comment") @db.Text
+
+  @@index([applicantId], map: "applicant_id")
+  @@index([userAddress], map: "user_address")
+  @@map("user_kyc_logs")
+}

@@ -1,0 +1,10 @@
+# Ignore artifacts:
+dist
+build
+coverage
+node_modules
+
+# Ignore all non-TS/JS files that we don't want to format (optional, but good practice)
+*.log
+.DS_Store
+
