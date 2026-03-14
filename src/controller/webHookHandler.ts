@@ -33,7 +33,7 @@ function checkDigitalSignature(req: Request): boolean {
 }
 
 export async function webHookHandler(req: Request, res: Response) {
-  const isCheck: boolean = checkDigitalSignature(req);
+  const isCheck: boolean = process.env.ENV === 'prod' ? checkDigitalSignature(req) : true;
   if (!isCheck) {
     return res.status(400).end();
   }
@@ -84,6 +84,7 @@ export async function webHookHandler(req: Request, res: Response) {
 
     res.status(200).end();
   } catch (error) {
+    console.error({ error });
     res.status(500).end();
   }
 }

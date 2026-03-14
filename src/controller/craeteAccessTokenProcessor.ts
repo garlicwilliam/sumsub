@@ -9,9 +9,9 @@ export async function createAccessTokenProcessor(req: Request, res: Response) {
 
   const address: string | null = parseQueryString(postData?.walletAddress, isValidAddress);
   const email: string | null = parseQueryString(postData?.email);
-  const isTest: boolean | null = parseQueryBool(postData?.isTest);
+  const isTest: boolean = parseQueryBool(postData?.isTest) || false;
 
-  if (!address || !email || isTest === null) {
+  if (!address) {
     return res400Obj(res);
   }
 

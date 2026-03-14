@@ -39,7 +39,7 @@ export async function createAccessToken(
   extUserId: string,
   levelName: string,
   ttlInSecs: number = 600,
-  email?: string,
+  email?: string | null,
 ): Promise<AccessTokenResponse> {
   let body: any = {
     userId: extUserId,

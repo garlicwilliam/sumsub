@@ -12,12 +12,14 @@ const adapter = new PrismaMariaDb({
   connectionLimit: 15,
 });
 
-export const prismaClient = new PrismaClient({ adapter });
+const prismaClient0 = new PrismaClient({
+  adapter,
+});
 
 async function connectAndVerify() {
   try {
     // 尝试连接
-    await prismaClient.$connect();
+    await prismaClient0.$connect();
     console.log('✅ Prisma Client 成功连接到数据库。');
   } catch (error) {
     console.error('❌ 数据库连接验证失败！');
@@ -31,3 +33,5 @@ async function connectAndVerify() {
   await connectAndVerify();
   console.log('--- 应用程序开始初始化... ---');
 })();
+
+export const prismaClient = prismaClient0;
