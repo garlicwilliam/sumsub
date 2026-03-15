@@ -1,5 +1,6 @@
 import { prismaClient } from '../prisma';
 import { WebHookCreated, WebHookOnHold, WebHookPending, WebHookReset, WebHookReviewed } from '../types/sumsub_webhook';
+import { UserKycStatus } from '../types/user_kyc_status';
 
 export async function confirmUserKycStatus(created: WebHookCreated, tx?: any): Promise<boolean> {
   const userAddress = created.externalUserId.toLowerCase();
@@ -252,5 +253,28 @@ export async function updateUserKycStatusByReset(reset: WebHookReset, tx?: any):
   } catch (error) {
     console.error('Error updating user KYC status (reset):', error);
     throw error;
+  }
+}
+
+export async function queryUserKycStatusByAddress(userAddress: string): Promise<UserKycStatus | null> {
+  try {
+    const record = await prismaClient.userKycStatus.findUnique({ where: { userAddress: userAddress } });
+    if (!record) {
+      return null;
+    }
+
+    return {
+      id: String(record.id),
+      userAddress: record.userAddress,
+      applicantId: record.applicantId,
+      levelName: record.levelName,
+      reviewStatus: record.reviewStatus,
+      reviewAnswer: record.reviewAnswer,
+      rejectedType: record.rejectedType,
+      updatedAt: record.updatedAt.toString(),
+      createdAt: record.createdAt.toString(),
+    };
+  } catch (error) {
+    return null;
   }
 }

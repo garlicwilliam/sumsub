@@ -5,15 +5,6 @@ export async function insertUserKycLog(webhook: SumsubWebHook, tx?: any): Promis
   const prisma = tx || prismaClient;
   const correlationId = webhook.correlationId;
 
-  // 1. Check if correlationId already exists
-  const existingLog = await prisma.userKycLogs.findFirst({
-    where: { correlationId: correlationId },
-  });
-
-  if (existingLog) {
-    throw new Error(`User KYC log skipped: correlationId ${correlationId} already exists`);
-  }
-
   // 2. Extract values based on webhook type
   let reviewAnswer: string | undefined;
   let rejectedType: string | undefined;
