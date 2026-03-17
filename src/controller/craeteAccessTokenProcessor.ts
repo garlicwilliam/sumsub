@@ -3,6 +3,7 @@ import { parseQueryBool, parseQueryString, res400Obj, res500Obj, resOkObj } from
 import { isValidAddress } from '../utils/string';
 import { isValidStoneWalletAddress } from '../fetch/stone_wallet/stone_wallet';
 import { createAccessToken } from '../fetch/sumsub/sumsub';
+import { createUserEnv } from '../services/user_env';
 
 export async function createAccessTokenProcessor(req: Request, res: Response) {
   const postData = req.body;
@@ -22,12 +23,21 @@ export async function createAccessTokenProcessor(req: Request, res: Response) {
 
   const walletAddress: string = address.toLowerCase();
 
-  const accessTokenRes = await createAccessToken(walletAddress, process.env.SUMSUB_LEVEL_NAME!, 600, email);
+  try {
+    const [, accessTokenRes] = await Promise.all([
+      createUserEnv(walletAddress, isTest ? 'test' : 'prod'),
+      createAccessToken(walletAddress, process.env.SUMSUB_LEVEL_NAME!, 600, email),
+    ]);
 
-  if (accessTokenRes.isOK) {
-    return resOkObj(res, { token: accessTokenRes.token, address: accessTokenRes.userId });
-  } else {
-    accessTokenRes.errorInfo;
-    return res500Obj(res, `failed to create access token: ${accessTokenRes.errorInfo}`);
+    if (accessTokenRes.isOK) {
+      return resOkObj(res, {
+        token: accessTokenRes.token,
+        address: accessTokenRes.userId,
+      });
+    } else {
+      return res500Obj(res, `failed to create access token: ${accessTokenRes.errorInfo}`);
+    }
+  } catch (error: any) {
+    return res500Obj(res, `process error: ${error.message || error}`);
   }
 }

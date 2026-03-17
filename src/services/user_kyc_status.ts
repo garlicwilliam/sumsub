@@ -1,9 +1,10 @@
 import { prismaClient } from '../prisma';
 import { WebHookCreated, WebHookOnHold, WebHookPending, WebHookReset, WebHookReviewed } from '../types/sumsub_webhook';
 import { UserKycStatus } from '../types/user_kyc_status';
+import { readUserEnv } from './user_env';
 
 export async function confirmUserKycStatus(created: WebHookCreated, tx?: any): Promise<boolean> {
-  const userAddress = created.externalUserId.toLowerCase();
+  const userAddress: string = created.externalUserId.toLowerCase();
 
   const createdTime: number = new Date(created.createdAtMs).getTime();
   const createdAt = createdTime;
@@ -14,6 +15,8 @@ export async function confirmUserKycStatus(created: WebHookCreated, tx?: any): P
   // db fields are not null, so provide defaults
   const defaultReviewAnswer = '';
   const defaultRejectedType = '';
+
+  const env: string = (await readUserEnv(userAddress)) || 'default';
 
   try {
     await (tx || prismaClient).userKycStatus.upsert({
@@ -30,6 +33,7 @@ export async function confirmUserKycStatus(created: WebHookCreated, tx?: any): P
       },
       create: {
         userAddress: userAddress,
+        env: env,
         applicantId: created.applicantId,
         levelName: levelName,
         reviewStatus: reviewStatus,

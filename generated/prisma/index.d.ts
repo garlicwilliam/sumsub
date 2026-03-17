@@ -23,6 +23,11 @@ export type UserKycStatus = $Result.DefaultSelection<Prisma.$UserKycStatusPayloa
  * 
  */
 export type UserKycLogs = $Result.DefaultSelection<Prisma.$UserKycLogsPayload>
+/**
+ * Model UserEnv
+ * 
+ */
+export type UserEnv = $Result.DefaultSelection<Prisma.$UserEnvPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -164,6 +169,16 @@ export class PrismaClient<
     * ```
     */
   get userKycLogs(): Prisma.UserKycLogsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userEnv`: Exposes CRUD operations for the **UserEnv** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserEnvs
+    * const userEnvs = await prisma.userEnv.findMany()
+    * ```
+    */
+  get userEnv(): Prisma.UserEnvDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -599,7 +614,8 @@ export namespace Prisma {
 
   export const ModelName: {
     UserKycStatus: 'UserKycStatus',
-    UserKycLogs: 'UserKycLogs'
+    UserKycLogs: 'UserKycLogs',
+    UserEnv: 'UserEnv'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -615,7 +631,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "userKycStatus" | "userKycLogs"
+      modelProps: "userKycStatus" | "userKycLogs" | "userEnv"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -751,6 +767,72 @@ export namespace Prisma {
           }
         }
       }
+      UserEnv: {
+        payload: Prisma.$UserEnvPayload<ExtArgs>
+        fields: Prisma.UserEnvFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserEnvFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserEnvFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>
+          }
+          findFirst: {
+            args: Prisma.UserEnvFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserEnvFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>
+          }
+          findMany: {
+            args: Prisma.UserEnvFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>[]
+          }
+          create: {
+            args: Prisma.UserEnvCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>
+          }
+          createMany: {
+            args: Prisma.UserEnvCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UserEnvDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>
+          }
+          update: {
+            args: Prisma.UserEnvUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserEnvDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserEnvUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserEnvUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserEnvPayload>
+          }
+          aggregate: {
+            args: Prisma.UserEnvAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserEnv>
+          }
+          groupBy: {
+            args: Prisma.UserEnvGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserEnvGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserEnvCountArgs<ExtArgs>
+            result: $Utils.Optional<UserEnvCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -861,6 +943,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     userKycStatus?: UserKycStatusOmit
     userKycLogs?: UserKycLogsOmit
+    userEnv?: UserEnvOmit
   }
 
   /* Types for Logging */
@@ -968,6 +1051,7 @@ export namespace Prisma {
   export type UserKycStatusMinAggregateOutputType = {
     id: bigint | null
     userAddress: string | null
+    env: string | null
     applicantId: string | null
     levelName: string | null
     reviewStatus: string | null
@@ -980,6 +1064,7 @@ export namespace Prisma {
   export type UserKycStatusMaxAggregateOutputType = {
     id: bigint | null
     userAddress: string | null
+    env: string | null
     applicantId: string | null
     levelName: string | null
     reviewStatus: string | null
@@ -992,6 +1077,7 @@ export namespace Prisma {
   export type UserKycStatusCountAggregateOutputType = {
     id: number
     userAddress: number
+    env: number
     applicantId: number
     levelName: number
     reviewStatus: number
@@ -1018,6 +1104,7 @@ export namespace Prisma {
   export type UserKycStatusMinAggregateInputType = {
     id?: true
     userAddress?: true
+    env?: true
     applicantId?: true
     levelName?: true
     reviewStatus?: true
@@ -1030,6 +1117,7 @@ export namespace Prisma {
   export type UserKycStatusMaxAggregateInputType = {
     id?: true
     userAddress?: true
+    env?: true
     applicantId?: true
     levelName?: true
     reviewStatus?: true
@@ -1042,6 +1130,7 @@ export namespace Prisma {
   export type UserKycStatusCountAggregateInputType = {
     id?: true
     userAddress?: true
+    env?: true
     applicantId?: true
     levelName?: true
     reviewStatus?: true
@@ -1141,6 +1230,7 @@ export namespace Prisma {
   export type UserKycStatusGroupByOutputType = {
     id: bigint
     userAddress: string
+    env: string
     applicantId: string
     levelName: string
     reviewStatus: string
@@ -1172,6 +1262,7 @@ export namespace Prisma {
   export type UserKycStatusSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userAddress?: boolean
+    env?: boolean
     applicantId?: boolean
     levelName?: boolean
     reviewStatus?: boolean
@@ -1186,6 +1277,7 @@ export namespace Prisma {
   export type UserKycStatusSelectScalar = {
     id?: boolean
     userAddress?: boolean
+    env?: boolean
     applicantId?: boolean
     levelName?: boolean
     reviewStatus?: boolean
@@ -1195,7 +1287,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type UserKycStatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userAddress" | "applicantId" | "levelName" | "reviewStatus" | "reviewAnswer" | "rejectedType" | "updatedAt" | "createdAt", ExtArgs["result"]["userKycStatus"]>
+  export type UserKycStatusOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userAddress" | "env" | "applicantId" | "levelName" | "reviewStatus" | "reviewAnswer" | "rejectedType" | "updatedAt" | "createdAt", ExtArgs["result"]["userKycStatus"]>
 
   export type $UserKycStatusPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserKycStatus"
@@ -1203,6 +1295,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       userAddress: string
+      env: string
       applicantId: string
       levelName: string
       reviewStatus: string
@@ -1581,6 +1674,7 @@ export namespace Prisma {
   interface UserKycStatusFieldRefs {
     readonly id: FieldRef<"UserKycStatus", 'BigInt'>
     readonly userAddress: FieldRef<"UserKycStatus", 'String'>
+    readonly env: FieldRef<"UserKycStatus", 'String'>
     readonly applicantId: FieldRef<"UserKycStatus", 'String'>
     readonly levelName: FieldRef<"UserKycStatus", 'String'>
     readonly reviewStatus: FieldRef<"UserKycStatus", 'String'>
@@ -2917,6 +3011,860 @@ export namespace Prisma {
 
 
   /**
+   * Model UserEnv
+   */
+
+  export type AggregateUserEnv = {
+    _count: UserEnvCountAggregateOutputType | null
+    _min: UserEnvMinAggregateOutputType | null
+    _max: UserEnvMaxAggregateOutputType | null
+  }
+
+  export type UserEnvMinAggregateOutputType = {
+    userAddress: string | null
+    env: string | null
+  }
+
+  export type UserEnvMaxAggregateOutputType = {
+    userAddress: string | null
+    env: string | null
+  }
+
+  export type UserEnvCountAggregateOutputType = {
+    userAddress: number
+    env: number
+    _all: number
+  }
+
+
+  export type UserEnvMinAggregateInputType = {
+    userAddress?: true
+    env?: true
+  }
+
+  export type UserEnvMaxAggregateInputType = {
+    userAddress?: true
+    env?: true
+  }
+
+  export type UserEnvCountAggregateInputType = {
+    userAddress?: true
+    env?: true
+    _all?: true
+  }
+
+  export type UserEnvAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserEnv to aggregate.
+     */
+    where?: UserEnvWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserEnvs to fetch.
+     */
+    orderBy?: UserEnvOrderByWithRelationInput | UserEnvOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserEnvWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserEnvs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserEnvs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserEnvs
+    **/
+    _count?: true | UserEnvCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserEnvMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserEnvMaxAggregateInputType
+  }
+
+  export type GetUserEnvAggregateType<T extends UserEnvAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserEnv]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserEnv[P]>
+      : GetScalarType<T[P], AggregateUserEnv[P]>
+  }
+
+
+
+
+  export type UserEnvGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserEnvWhereInput
+    orderBy?: UserEnvOrderByWithAggregationInput | UserEnvOrderByWithAggregationInput[]
+    by: UserEnvScalarFieldEnum[] | UserEnvScalarFieldEnum
+    having?: UserEnvScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserEnvCountAggregateInputType | true
+    _min?: UserEnvMinAggregateInputType
+    _max?: UserEnvMaxAggregateInputType
+  }
+
+  export type UserEnvGroupByOutputType = {
+    userAddress: string
+    env: string
+    _count: UserEnvCountAggregateOutputType | null
+    _min: UserEnvMinAggregateOutputType | null
+    _max: UserEnvMaxAggregateOutputType | null
+  }
+
+  type GetUserEnvGroupByPayload<T extends UserEnvGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserEnvGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserEnvGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserEnvGroupByOutputType[P]>
+            : GetScalarType<T[P], UserEnvGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserEnvSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userAddress?: boolean
+    env?: boolean
+  }, ExtArgs["result"]["userEnv"]>
+
+
+
+  export type UserEnvSelectScalar = {
+    userAddress?: boolean
+    env?: boolean
+  }
+
+  export type UserEnvOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userAddress" | "env", ExtArgs["result"]["userEnv"]>
+
+  export type $UserEnvPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserEnv"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      userAddress: string
+      env: string
+    }, ExtArgs["result"]["userEnv"]>
+    composites: {}
+  }
+
+  type UserEnvGetPayload<S extends boolean | null | undefined | UserEnvDefaultArgs> = $Result.GetResult<Prisma.$UserEnvPayload, S>
+
+  type UserEnvCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserEnvFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserEnvCountAggregateInputType | true
+    }
+
+  export interface UserEnvDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserEnv'], meta: { name: 'UserEnv' } }
+    /**
+     * Find zero or one UserEnv that matches the filter.
+     * @param {UserEnvFindUniqueArgs} args - Arguments to find a UserEnv
+     * @example
+     * // Get one UserEnv
+     * const userEnv = await prisma.userEnv.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserEnvFindUniqueArgs>(args: SelectSubset<T, UserEnvFindUniqueArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserEnv that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserEnvFindUniqueOrThrowArgs} args - Arguments to find a UserEnv
+     * @example
+     * // Get one UserEnv
+     * const userEnv = await prisma.userEnv.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserEnvFindUniqueOrThrowArgs>(args: SelectSubset<T, UserEnvFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserEnv that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvFindFirstArgs} args - Arguments to find a UserEnv
+     * @example
+     * // Get one UserEnv
+     * const userEnv = await prisma.userEnv.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserEnvFindFirstArgs>(args?: SelectSubset<T, UserEnvFindFirstArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserEnv that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvFindFirstOrThrowArgs} args - Arguments to find a UserEnv
+     * @example
+     * // Get one UserEnv
+     * const userEnv = await prisma.userEnv.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserEnvFindFirstOrThrowArgs>(args?: SelectSubset<T, UserEnvFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserEnvs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserEnvs
+     * const userEnvs = await prisma.userEnv.findMany()
+     * 
+     * // Get first 10 UserEnvs
+     * const userEnvs = await prisma.userEnv.findMany({ take: 10 })
+     * 
+     * // Only select the `userAddress`
+     * const userEnvWithUserAddressOnly = await prisma.userEnv.findMany({ select: { userAddress: true } })
+     * 
+     */
+    findMany<T extends UserEnvFindManyArgs>(args?: SelectSubset<T, UserEnvFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserEnv.
+     * @param {UserEnvCreateArgs} args - Arguments to create a UserEnv.
+     * @example
+     * // Create one UserEnv
+     * const UserEnv = await prisma.userEnv.create({
+     *   data: {
+     *     // ... data to create a UserEnv
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserEnvCreateArgs>(args: SelectSubset<T, UserEnvCreateArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserEnvs.
+     * @param {UserEnvCreateManyArgs} args - Arguments to create many UserEnvs.
+     * @example
+     * // Create many UserEnvs
+     * const userEnv = await prisma.userEnv.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserEnvCreateManyArgs>(args?: SelectSubset<T, UserEnvCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UserEnv.
+     * @param {UserEnvDeleteArgs} args - Arguments to delete one UserEnv.
+     * @example
+     * // Delete one UserEnv
+     * const UserEnv = await prisma.userEnv.delete({
+     *   where: {
+     *     // ... filter to delete one UserEnv
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserEnvDeleteArgs>(args: SelectSubset<T, UserEnvDeleteArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserEnv.
+     * @param {UserEnvUpdateArgs} args - Arguments to update one UserEnv.
+     * @example
+     * // Update one UserEnv
+     * const userEnv = await prisma.userEnv.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserEnvUpdateArgs>(args: SelectSubset<T, UserEnvUpdateArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserEnvs.
+     * @param {UserEnvDeleteManyArgs} args - Arguments to filter UserEnvs to delete.
+     * @example
+     * // Delete a few UserEnvs
+     * const { count } = await prisma.userEnv.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserEnvDeleteManyArgs>(args?: SelectSubset<T, UserEnvDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserEnvs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserEnvs
+     * const userEnv = await prisma.userEnv.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserEnvUpdateManyArgs>(args: SelectSubset<T, UserEnvUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserEnv.
+     * @param {UserEnvUpsertArgs} args - Arguments to update or create a UserEnv.
+     * @example
+     * // Update or create a UserEnv
+     * const userEnv = await prisma.userEnv.upsert({
+     *   create: {
+     *     // ... data to create a UserEnv
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserEnv we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserEnvUpsertArgs>(args: SelectSubset<T, UserEnvUpsertArgs<ExtArgs>>): Prisma__UserEnvClient<$Result.GetResult<Prisma.$UserEnvPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserEnvs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvCountArgs} args - Arguments to filter UserEnvs to count.
+     * @example
+     * // Count the number of UserEnvs
+     * const count = await prisma.userEnv.count({
+     *   where: {
+     *     // ... the filter for the UserEnvs we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserEnvCountArgs>(
+      args?: Subset<T, UserEnvCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserEnvCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserEnv.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserEnvAggregateArgs>(args: Subset<T, UserEnvAggregateArgs>): Prisma.PrismaPromise<GetUserEnvAggregateType<T>>
+
+    /**
+     * Group by UserEnv.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserEnvGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserEnvGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserEnvGroupByArgs['orderBy'] }
+        : { orderBy?: UserEnvGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserEnvGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserEnvGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserEnv model
+   */
+  readonly fields: UserEnvFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserEnv.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserEnvClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserEnv model
+   */
+  interface UserEnvFieldRefs {
+    readonly userAddress: FieldRef<"UserEnv", 'String'>
+    readonly env: FieldRef<"UserEnv", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserEnv findUnique
+   */
+  export type UserEnvFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * Filter, which UserEnv to fetch.
+     */
+    where: UserEnvWhereUniqueInput
+  }
+
+  /**
+   * UserEnv findUniqueOrThrow
+   */
+  export type UserEnvFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * Filter, which UserEnv to fetch.
+     */
+    where: UserEnvWhereUniqueInput
+  }
+
+  /**
+   * UserEnv findFirst
+   */
+  export type UserEnvFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * Filter, which UserEnv to fetch.
+     */
+    where?: UserEnvWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserEnvs to fetch.
+     */
+    orderBy?: UserEnvOrderByWithRelationInput | UserEnvOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserEnvs.
+     */
+    cursor?: UserEnvWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserEnvs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserEnvs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserEnvs.
+     */
+    distinct?: UserEnvScalarFieldEnum | UserEnvScalarFieldEnum[]
+  }
+
+  /**
+   * UserEnv findFirstOrThrow
+   */
+  export type UserEnvFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * Filter, which UserEnv to fetch.
+     */
+    where?: UserEnvWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserEnvs to fetch.
+     */
+    orderBy?: UserEnvOrderByWithRelationInput | UserEnvOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserEnvs.
+     */
+    cursor?: UserEnvWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserEnvs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserEnvs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserEnvs.
+     */
+    distinct?: UserEnvScalarFieldEnum | UserEnvScalarFieldEnum[]
+  }
+
+  /**
+   * UserEnv findMany
+   */
+  export type UserEnvFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * Filter, which UserEnvs to fetch.
+     */
+    where?: UserEnvWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserEnvs to fetch.
+     */
+    orderBy?: UserEnvOrderByWithRelationInput | UserEnvOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserEnvs.
+     */
+    cursor?: UserEnvWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserEnvs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserEnvs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserEnvs.
+     */
+    distinct?: UserEnvScalarFieldEnum | UserEnvScalarFieldEnum[]
+  }
+
+  /**
+   * UserEnv create
+   */
+  export type UserEnvCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * The data needed to create a UserEnv.
+     */
+    data: XOR<UserEnvCreateInput, UserEnvUncheckedCreateInput>
+  }
+
+  /**
+   * UserEnv createMany
+   */
+  export type UserEnvCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserEnvs.
+     */
+    data: UserEnvCreateManyInput | UserEnvCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserEnv update
+   */
+  export type UserEnvUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * The data needed to update a UserEnv.
+     */
+    data: XOR<UserEnvUpdateInput, UserEnvUncheckedUpdateInput>
+    /**
+     * Choose, which UserEnv to update.
+     */
+    where: UserEnvWhereUniqueInput
+  }
+
+  /**
+   * UserEnv updateMany
+   */
+  export type UserEnvUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserEnvs.
+     */
+    data: XOR<UserEnvUpdateManyMutationInput, UserEnvUncheckedUpdateManyInput>
+    /**
+     * Filter which UserEnvs to update
+     */
+    where?: UserEnvWhereInput
+    /**
+     * Limit how many UserEnvs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserEnv upsert
+   */
+  export type UserEnvUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * The filter to search for the UserEnv to update in case it exists.
+     */
+    where: UserEnvWhereUniqueInput
+    /**
+     * In case the UserEnv found by the `where` argument doesn't exist, create a new UserEnv with this data.
+     */
+    create: XOR<UserEnvCreateInput, UserEnvUncheckedCreateInput>
+    /**
+     * In case the UserEnv was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserEnvUpdateInput, UserEnvUncheckedUpdateInput>
+  }
+
+  /**
+   * UserEnv delete
+   */
+  export type UserEnvDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+    /**
+     * Filter which UserEnv to delete.
+     */
+    where: UserEnvWhereUniqueInput
+  }
+
+  /**
+   * UserEnv deleteMany
+   */
+  export type UserEnvDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserEnvs to delete
+     */
+    where?: UserEnvWhereInput
+    /**
+     * Limit how many UserEnvs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserEnv without action
+   */
+  export type UserEnvDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEnv
+     */
+    select?: UserEnvSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEnv
+     */
+    omit?: UserEnvOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -2933,6 +3881,7 @@ export namespace Prisma {
   export const UserKycStatusScalarFieldEnum: {
     id: 'id',
     userAddress: 'userAddress',
+    env: 'env',
     applicantId: 'applicantId',
     levelName: 'levelName',
     reviewStatus: 'reviewStatus',
@@ -2963,6 +3912,14 @@ export namespace Prisma {
   export type UserKycLogsScalarFieldEnum = (typeof UserKycLogsScalarFieldEnum)[keyof typeof UserKycLogsScalarFieldEnum]
 
 
+  export const UserEnvScalarFieldEnum: {
+    userAddress: 'userAddress',
+    env: 'env'
+  };
+
+  export type UserEnvScalarFieldEnum = (typeof UserEnvScalarFieldEnum)[keyof typeof UserEnvScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -2973,6 +3930,7 @@ export namespace Prisma {
 
   export const UserKycStatusOrderByRelevanceFieldEnum: {
     userAddress: 'userAddress',
+    env: 'env',
     applicantId: 'applicantId',
     levelName: 'levelName',
     reviewStatus: 'reviewStatus',
@@ -3005,6 +3963,14 @@ export namespace Prisma {
   };
 
   export type UserKycLogsOrderByRelevanceFieldEnum = (typeof UserKycLogsOrderByRelevanceFieldEnum)[keyof typeof UserKycLogsOrderByRelevanceFieldEnum]
+
+
+  export const UserEnvOrderByRelevanceFieldEnum: {
+    userAddress: 'userAddress',
+    env: 'env'
+  };
+
+  export type UserEnvOrderByRelevanceFieldEnum = (typeof UserEnvOrderByRelevanceFieldEnum)[keyof typeof UserEnvOrderByRelevanceFieldEnum]
 
 
   /**
@@ -3049,6 +4015,7 @@ export namespace Prisma {
     NOT?: UserKycStatusWhereInput | UserKycStatusWhereInput[]
     id?: BigIntFilter<"UserKycStatus"> | bigint | number
     userAddress?: StringFilter<"UserKycStatus"> | string
+    env?: StringFilter<"UserKycStatus"> | string
     applicantId?: StringFilter<"UserKycStatus"> | string
     levelName?: StringFilter<"UserKycStatus"> | string
     reviewStatus?: StringFilter<"UserKycStatus"> | string
@@ -3061,6 +4028,7 @@ export namespace Prisma {
   export type UserKycStatusOrderByWithRelationInput = {
     id?: SortOrder
     userAddress?: SortOrder
+    env?: SortOrder
     applicantId?: SortOrder
     levelName?: SortOrder
     reviewStatus?: SortOrder
@@ -3077,6 +4045,7 @@ export namespace Prisma {
     AND?: UserKycStatusWhereInput | UserKycStatusWhereInput[]
     OR?: UserKycStatusWhereInput[]
     NOT?: UserKycStatusWhereInput | UserKycStatusWhereInput[]
+    env?: StringFilter<"UserKycStatus"> | string
     applicantId?: StringFilter<"UserKycStatus"> | string
     levelName?: StringFilter<"UserKycStatus"> | string
     reviewStatus?: StringFilter<"UserKycStatus"> | string
@@ -3089,6 +4058,7 @@ export namespace Prisma {
   export type UserKycStatusOrderByWithAggregationInput = {
     id?: SortOrder
     userAddress?: SortOrder
+    env?: SortOrder
     applicantId?: SortOrder
     levelName?: SortOrder
     reviewStatus?: SortOrder
@@ -3109,6 +4079,7 @@ export namespace Prisma {
     NOT?: UserKycStatusScalarWhereWithAggregatesInput | UserKycStatusScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"UserKycStatus"> | bigint | number
     userAddress?: StringWithAggregatesFilter<"UserKycStatus"> | string
+    env?: StringWithAggregatesFilter<"UserKycStatus"> | string
     applicantId?: StringWithAggregatesFilter<"UserKycStatus"> | string
     levelName?: StringWithAggregatesFilter<"UserKycStatus"> | string
     reviewStatus?: StringWithAggregatesFilter<"UserKycStatus"> | string
@@ -3208,9 +4179,48 @@ export namespace Prisma {
     moderationComment?: StringNullableWithAggregatesFilter<"UserKycLogs"> | string | null
   }
 
+  export type UserEnvWhereInput = {
+    AND?: UserEnvWhereInput | UserEnvWhereInput[]
+    OR?: UserEnvWhereInput[]
+    NOT?: UserEnvWhereInput | UserEnvWhereInput[]
+    userAddress?: StringFilter<"UserEnv"> | string
+    env?: StringFilter<"UserEnv"> | string
+  }
+
+  export type UserEnvOrderByWithRelationInput = {
+    userAddress?: SortOrder
+    env?: SortOrder
+    _relevance?: UserEnvOrderByRelevanceInput
+  }
+
+  export type UserEnvWhereUniqueInput = Prisma.AtLeast<{
+    userAddress?: string
+    AND?: UserEnvWhereInput | UserEnvWhereInput[]
+    OR?: UserEnvWhereInput[]
+    NOT?: UserEnvWhereInput | UserEnvWhereInput[]
+    env?: StringFilter<"UserEnv"> | string
+  }, "userAddress">
+
+  export type UserEnvOrderByWithAggregationInput = {
+    userAddress?: SortOrder
+    env?: SortOrder
+    _count?: UserEnvCountOrderByAggregateInput
+    _max?: UserEnvMaxOrderByAggregateInput
+    _min?: UserEnvMinOrderByAggregateInput
+  }
+
+  export type UserEnvScalarWhereWithAggregatesInput = {
+    AND?: UserEnvScalarWhereWithAggregatesInput | UserEnvScalarWhereWithAggregatesInput[]
+    OR?: UserEnvScalarWhereWithAggregatesInput[]
+    NOT?: UserEnvScalarWhereWithAggregatesInput | UserEnvScalarWhereWithAggregatesInput[]
+    userAddress?: StringWithAggregatesFilter<"UserEnv"> | string
+    env?: StringWithAggregatesFilter<"UserEnv"> | string
+  }
+
   export type UserKycStatusCreateInput = {
     id?: bigint | number
     userAddress: string
+    env: string
     applicantId: string
     levelName: string
     reviewStatus: string
@@ -3223,6 +4233,7 @@ export namespace Prisma {
   export type UserKycStatusUncheckedCreateInput = {
     id?: bigint | number
     userAddress: string
+    env: string
     applicantId: string
     levelName: string
     reviewStatus: string
@@ -3235,6 +4246,7 @@ export namespace Prisma {
   export type UserKycStatusUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
     levelName?: StringFieldUpdateOperationsInput | string
     reviewStatus?: StringFieldUpdateOperationsInput | string
@@ -3247,6 +4259,7 @@ export namespace Prisma {
   export type UserKycStatusUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
     levelName?: StringFieldUpdateOperationsInput | string
     reviewStatus?: StringFieldUpdateOperationsInput | string
@@ -3259,6 +4272,7 @@ export namespace Prisma {
   export type UserKycStatusCreateManyInput = {
     id?: bigint | number
     userAddress: string
+    env: string
     applicantId: string
     levelName: string
     reviewStatus: string
@@ -3271,6 +4285,7 @@ export namespace Prisma {
   export type UserKycStatusUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
     levelName?: StringFieldUpdateOperationsInput | string
     reviewStatus?: StringFieldUpdateOperationsInput | string
@@ -3283,6 +4298,7 @@ export namespace Prisma {
   export type UserKycStatusUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
     applicantId?: StringFieldUpdateOperationsInput | string
     levelName?: StringFieldUpdateOperationsInput | string
     reviewStatus?: StringFieldUpdateOperationsInput | string
@@ -3397,6 +4413,41 @@ export namespace Prisma {
     moderationComment?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type UserEnvCreateInput = {
+    userAddress: string
+    env: string
+  }
+
+  export type UserEnvUncheckedCreateInput = {
+    userAddress: string
+    env: string
+  }
+
+  export type UserEnvUpdateInput = {
+    userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserEnvUncheckedUpdateInput = {
+    userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserEnvCreateManyInput = {
+    userAddress: string
+    env: string
+  }
+
+  export type UserEnvUpdateManyMutationInput = {
+    userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserEnvUncheckedUpdateManyInput = {
+    userAddress?: StringFieldUpdateOperationsInput | string
+    env?: StringFieldUpdateOperationsInput | string
+  }
+
   export type BigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[]
@@ -3432,6 +4483,7 @@ export namespace Prisma {
   export type UserKycStatusCountOrderByAggregateInput = {
     id?: SortOrder
     userAddress?: SortOrder
+    env?: SortOrder
     applicantId?: SortOrder
     levelName?: SortOrder
     reviewStatus?: SortOrder
@@ -3450,6 +4502,7 @@ export namespace Prisma {
   export type UserKycStatusMaxOrderByAggregateInput = {
     id?: SortOrder
     userAddress?: SortOrder
+    env?: SortOrder
     applicantId?: SortOrder
     levelName?: SortOrder
     reviewStatus?: SortOrder
@@ -3462,6 +4515,7 @@ export namespace Prisma {
   export type UserKycStatusMinOrderByAggregateInput = {
     id?: SortOrder
     userAddress?: SortOrder
+    env?: SortOrder
     applicantId?: SortOrder
     levelName?: SortOrder
     reviewStatus?: SortOrder
@@ -3608,6 +4662,27 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type UserEnvOrderByRelevanceInput = {
+    fields: UserEnvOrderByRelevanceFieldEnum | UserEnvOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type UserEnvCountOrderByAggregateInput = {
+    userAddress?: SortOrder
+    env?: SortOrder
+  }
+
+  export type UserEnvMaxOrderByAggregateInput = {
+    userAddress?: SortOrder
+    env?: SortOrder
+  }
+
+  export type UserEnvMinOrderByAggregateInput = {
+    userAddress?: SortOrder
+    env?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {

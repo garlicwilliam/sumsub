@@ -11,7 +11,7 @@
  Target Server Version : 80407 (8.4.7)
  File Encoding         : 65001
 
- Date: 12/03/2026 23:23:23
+ Date: 17/03/2026 21:23:39
 */
 
 SET NAMES utf8mb4;
@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `user_kyc_status`;
 CREATE TABLE `user_kyc_status` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `user_address` varchar(64) NOT NULL,
+  `env` varchar(32) NOT NULL,
   `applicant_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `level_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `review_status` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,

@@ -123,6 +123,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserKycStatusScalarFieldEnum = {
   id: 'id',
   userAddress: 'userAddress',
+  env: 'env',
   applicantId: 'applicantId',
   levelName: 'levelName',
   reviewStatus: 'reviewStatus',
@@ -147,6 +148,11 @@ exports.Prisma.UserKycLogsScalarFieldEnum = {
   moderationComment: 'moderationComment'
 };
 
+exports.Prisma.UserEnvScalarFieldEnum = {
+  userAddress: 'userAddress',
+  env: 'env'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -154,6 +160,7 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.UserKycStatusOrderByRelevanceFieldEnum = {
   userAddress: 'userAddress',
+  env: 'env',
   applicantId: 'applicantId',
   levelName: 'levelName',
   reviewStatus: 'reviewStatus',
@@ -179,10 +186,16 @@ exports.Prisma.UserKycLogsOrderByRelevanceFieldEnum = {
   moderationComment: 'moderationComment'
 };
 
+exports.Prisma.UserEnvOrderByRelevanceFieldEnum = {
+  userAddress: 'userAddress',
+  env: 'env'
+};
+
 
 exports.Prisma.ModelName = {
   UserKycStatus: 'UserKycStatus',
-  UserKycLogs: 'UserKycLogs'
+  UserKycLogs: 'UserKycLogs',
+  UserEnv: 'UserEnv'
 };
 
 /**
