@@ -15,4 +15,5 @@ export type UserKycStatusRes = {
   reviewStatus: string;
   reviewAnswer: string;
   rejectedType: string;
+  applicantId: string;
 };

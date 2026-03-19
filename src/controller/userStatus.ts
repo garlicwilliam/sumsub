@@ -22,6 +22,7 @@ export async function userStatusGetter(req: Request, res: Response) {
       reviewStatus: 'none',
       reviewAnswer: '',
       rejectedType: '',
+      applicantId: '',
     };
 
     return resOkObj(res, statusRes);
@@ -31,6 +32,7 @@ export async function userStatusGetter(req: Request, res: Response) {
       reviewStatus: status.reviewStatus,
       reviewAnswer: status.reviewAnswer,
       rejectedType: status.rejectedType,
+      applicantId: status.applicantId,
     };
 
     return resOkObj(res, statusRes);
