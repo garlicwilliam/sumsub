@@ -1,17 +1,17 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : LOCAL
+ Source Server         : CEDEFI
  Source Server Type    : MySQL
- Source Server Version : 80407 (8.4.7)
- Source Host           : localhost:3306
+ Source Server Version : 80042 (8.0.42)
+ Source Host           : cedefi-database-instance.cwwyatalynow.ap-northeast-1.rds.amazonaws.com:49123
  Source Schema         : sumsub_kyc
 
  Target Server Type    : MySQL
- Target Server Version : 80407 (8.4.7)
+ Target Server Version : 80042 (8.0.42)
  File Encoding         : 65001
 
- Date: 12/03/2026 23:23:13
+ Date: 15/04/2026 16:54:41
 */
 
 SET NAMES utf8mb4;
@@ -35,9 +35,9 @@ CREATE TABLE `user_kyc_logs` (
   `client_comment` text,
   `moderation_comment` text,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `correlation_id` (`correlation_id`) USING BTREE,
   KEY `applicant_id` (`applicant_id`),
-  KEY `user_address` (`user_address`) USING BTREE
+  KEY `user_address` (`user_address`) USING BTREE,
+  KEY `correlation_id` (`correlation_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;

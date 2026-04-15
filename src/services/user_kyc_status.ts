@@ -225,9 +225,27 @@ export async function updateUserKycStatusByReset(reset: WebHookReset, tx?: any):
       where: { userAddress: userAddress },
     });
 
+    // reset
     if (!existingRecord) {
-      console.log(`User KYC status (reset) skipped: User not found for address ${userAddress}`);
-      return false;
+      const env: string = (await readUserEnv(userAddress)) || 'default';
+      const createdTime: number = new Date(reset.createdAtMs).getTime();
+
+      /// insert if not exist
+      await prisma.userKycStatus.create({
+        data: {
+          userAddress,
+          env,
+          applicantId: reset.applicantId,
+          levelName: reset.levelName,
+          reviewStatus,
+          reviewAnswer: '',
+          rejectedType: '',
+          updatedAt: createdTime,
+          createdAt: createdTime,
+        },
+      });
+      console.log(`User KYC status new create (reset) for address: ${userAddress}`);
+      return true;
     }
 
     const dbUpdatedAt = Number(existingRecord.updatedAt);
